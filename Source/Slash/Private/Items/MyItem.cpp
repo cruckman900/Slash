@@ -29,8 +29,8 @@ void AMyItem::BeginPlay()
 	{
 		// Define and show debug objects for this instanced item
 		FColor Color = FColor::Silver;
-		FColor ColorForward = FColor::Green;
-		FColor ColorRight = FColor::Red;
+		FColor ColorForward = FColor::Red;
+		FColor ColorRight = FColor::Green;
 		FColor ColorUp = FColor::Blue;
 
 		DRAW_SPHERE(Location, Color);
