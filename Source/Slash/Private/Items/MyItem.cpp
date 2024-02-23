@@ -2,10 +2,7 @@
 
 
 #include "Items/MyItem.h"
-#include "DrawDebugHelpers.h"
-#include "Slash/Slash.h"
-
-#define THIRTY 30
+#include "Slash/DebugMacros.h"
 
 // Sets default values
 AMyItem::AMyItem()
@@ -27,6 +24,10 @@ void AMyItem::BeginPlay()
 
 	if (World)
 	{
+		const FString MyStringPrintf = FString::Printf(TEXT("Item {0} created at coords ({1}, {2}, {3})"));
+		const FString MyStringFormatted = FString::Format(*MyStringPrintf, { GetName(), Location.X, Location.Y, Location.Z });
+		PRINT_TO_SCREEN(1, FColor::Cyan, *MyStringFormatted);
+
 		// Define and show debug objects for this instanced item
 		FColor Color = FColor::Silver;
 		FColor ColorForward = FColor::Red;
@@ -49,4 +50,3 @@ void AMyItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
-
