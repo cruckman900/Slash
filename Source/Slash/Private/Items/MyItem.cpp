@@ -2,10 +2,15 @@
 
 
 #include "Items/MyItem.h"
+#include "DrawDebugHelpers.h"
+#include "Slash/Slash.h"
+
+#define THIRTY 30
 
 // Sets default values
 AMyItem::AMyItem()
 {
+	// Pre-packaged bool to determine if timer should tick
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -13,27 +18,22 @@ void AMyItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UE_LOG(LogTemp, Warning, TEXT("Begin Play called!"));
+	// Variables for finding the world and vector values for location and direction of objects in the world
+	UWorld* World = GetWorld();
+	FVector Location = GetActorLocation();
+	FVector Forward = GetActorForwardVector();
 
-	if (GEngine)
+	if (World)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item OnScreen Message!"));
+		// Define and show debug objects for this instanced item
+		FColor Color = FColor::Cyan;
+		DRAW_SPHERE(Location, Color);
+		DRAW_LINE(Location, Location + Forward * 100.f, Color);
 	}
 }
 
 void AMyItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
-
-	if (GEngine)
-	{
-		FString Name = GetName();
-		FString Message = FString::Printf(TEXT("Item Name: %s"), *Name);
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message);
-
-		UE_LOG(LogTemp, Warning, TEXT("Item Name: %s"), *Name);
-	}
 }
 
