@@ -18,4 +18,20 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+private:
+	float MovementRate;
+	float RotationRate;
+	float RunningTime;
+	float DeltaZ;
+
+	FVector Location;
+	FVector Forward;
+	FVector Right;
+	FVector Up;
+
+	FColor Color;
+	FColor ColorForward;
+	FColor ColorRight;
+	FColor ColorUp;
+
 };
