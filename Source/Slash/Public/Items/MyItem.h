@@ -18,10 +18,25 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
+	float Amplitude = 0.25f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
+	float TimeConstant = 5.f;
+
+	UFUNCTION(BlueprintPure)
+	float TransformedSin();
+
+	UFUNCTION(BlueprintPure)
+	float TransformedCos();
+
 private:
-	float MovementRate;
-	float RotationRate;
+	float MovementRate = 50.f;
+	float RotationRate = 45.f;
+
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	float RunningTime;
+
 	float DeltaZ;
 
 	FVector Location;
