@@ -24,11 +24,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sine Parameters")
 	float TimeConstant = 5.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
+	bool ShowDebugObjects = false;
+
 	UFUNCTION(BlueprintPure)
 	float TransformedSin();
 
 	UFUNCTION(BlueprintPure)
 	float TransformedCos();
+
+	template<typename T>
+	T Avg(T First, T Second);
 
 private:
 	float MovementRate = 50.f;
@@ -37,16 +43,16 @@ private:
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	float RunningTime;
 
-	float DeltaZ;
+	FVector Location, Forward, Right, Up;
+	FColor Color, ColorForward, ColorRight, ColorUp;
+	void DrawDebugObjects();
 
-	FVector Location;
-	FVector Forward;
-	FVector Right;
-	FVector Up;
-
-	FColor Color;
-	FColor ColorForward;
-	FColor ColorRight;
-	FColor ColorUp;
-
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* ItemMesh;
 };
+
+template<typename T>
+inline T AMyItem::Avg(T First, T Second)
+{
+	return (First + Second) / 2;
+}
