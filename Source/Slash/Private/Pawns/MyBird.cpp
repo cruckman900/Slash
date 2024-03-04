@@ -50,6 +50,7 @@ void AMyBird::BeginPlay()
 	
 }
 
+/* To use with old input system
 void AMyBird::MoveForward(float Value)
 {
 	if (Controller && (Value != 0.f))
@@ -59,6 +60,17 @@ void AMyBird::MoveForward(float Value)
 	}
 
 }
+
+void AMyBird::Turn(float Value)
+{
+	AddControllerYawInput(Value);
+}
+
+void AMyBird::LookUp(float Value)
+{
+	AddControllerPitchInput(Value);
+}
+*/
 
 void AMyBird::Move(const FInputActionValue& Value)
 {
@@ -70,6 +82,17 @@ void AMyBird::Move(const FInputActionValue& Value)
 		AddMovementInput(Forward, DirectionValue);
 	}
 
+}
+
+void AMyBird::Look(const FInputActionValue& Value)
+{
+	const FVector2D LookAxisValue = Value.Get<FVector2D>();
+
+	if (GetController())
+	{
+		AddControllerYawInput(LookAxisValue.X);
+		AddControllerPitchInput(LookAxisValue.Y);
+	}
 }
 
 // Called every frame
@@ -87,9 +110,14 @@ void AMyBird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMyBird::Move);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMyBird::Look);
 	}
 
-	//PlayerInputComponent->BindAxis(FName("MoveForward"), this, &AMyBird::MoveForward);
+	/* To use with old input system
+	PlayerInputComponent->BindAxis(FName("MoveForward"), this, &AMyBird::MoveForward);
+	PlayerInputComponent->BindAxis(FName("Turn"), this, &AMyBird::Turn);
+	PlayerInputComponent->BindAxis(FName("LookUp"), this, &AMyBird::LookUp);
+	*/
 
 }
 
