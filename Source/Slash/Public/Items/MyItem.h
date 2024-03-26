@@ -44,6 +44,8 @@ protected:
 	UFUNCTION()
 	virtual void OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* ItemMesh;
 
 private:
 	float MovementRate = 50.f;
@@ -57,10 +59,8 @@ private:
 	void DrawDebugObjects();
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* ItemMesh;
-
-	UPROPERTY(VisibleAnywhere)
 	USphereComponent* Sphere;
+
 };
 
 template<typename T>

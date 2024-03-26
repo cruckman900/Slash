@@ -82,6 +82,7 @@ void AMyItem::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 
+	/*
 	if (GetWorld())
 	{
 		if (ShowDebugObjects)
@@ -91,4 +92,5 @@ void AMyItem::Tick(float DeltaTime)
 
 		AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
 	}
+	*/
 }
