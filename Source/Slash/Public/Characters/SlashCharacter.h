@@ -12,6 +12,7 @@ class UCameraComponent;
 class UGroomComponent;
 class UInputMappingContext;
 class UInputAction;
+class AMyItem;
 
 UCLASS()
 class SLASH_API ASlashCharacter : public ACharacter
@@ -38,6 +39,15 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* EKeyAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* AttackAction;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* DodgeAction;
+
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
@@ -47,6 +57,9 @@ protected:
 	void Turn(float Value);
 	void LookUp(float Value);
 	*/
+
+	void EKeyPressed();
+
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -61,4 +74,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Hair)
 	UGroomComponent* Eyebrows;
 
+	UPROPERTY(VisibleInstanceOnly)
+	AMyItem* OverlappingItem;
+
+public:
+	FORCEINLINE void SetOverlappingItem(AMyItem* Item) { OverlappingItem = Item; }
 };
