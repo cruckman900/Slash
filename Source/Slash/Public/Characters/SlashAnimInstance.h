@@ -31,6 +31,7 @@ public:
 	UPROPERTY(BluePrintReadOnly, Category = Movement)
 	bool IsFalling;
 
+	UPROPERTY(BluePrintReadOnly, Category = "Movement | Character State")
 	ECharacterState CharacterState;
 
 };
