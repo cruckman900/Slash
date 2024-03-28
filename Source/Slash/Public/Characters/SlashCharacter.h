@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CharacterTypes.h"
 #include "InputActionValue.h"
 #include "SlashCharacter.generated.h"
 
@@ -62,6 +63,8 @@ protected:
 
 
 private:
+	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* CameraBoom;
 
@@ -79,4 +82,5 @@ private:
 
 public:
 	FORCEINLINE void SetOverlappingItem(AMyItem* Item) { OverlappingItem = Item; }
+	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
 };
