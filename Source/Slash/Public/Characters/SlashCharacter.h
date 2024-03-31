@@ -14,6 +14,7 @@ class UGroomComponent;
 class UInputMappingContext;
 class UInputAction;
 class AMyItem;
+class UAnimMontage;
 
 UCLASS()
 class SLASH_API ASlashCharacter : public ACharacter
@@ -60,10 +61,23 @@ protected:
 	*/
 
 	void EKeyPressed();
+	void Attack();
 
+	/**
+	* Play montage functions
+	*/
+
+	void PlayAttackMontage();
+
+	UFUNCTION(BlueprintCallable)
+	void AttackEnd();
+	bool CanAttack();
 
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* CameraBoom;
@@ -79,6 +93,13 @@ private:
 
 	UPROPERTY(VisibleInstanceOnly)
 	AMyItem* OverlappingItem;
+
+	/**
+	* Animation montages
+	*/
+
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* AttackMontage;
 
 public:
 	FORCEINLINE void SetOverlappingItem(AMyItem* Item) { OverlappingItem = Item; }
